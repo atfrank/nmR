@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility_functions.R
 \name{update_package}
 \alias{update_package}
-\title{Packahe Documentation Update Function}
+\title{Package Documentation Update Function}
 \usage{
 update_package(package_path = "/Users/atfrank/GitSoftware/nmR",
   package_name = "nmR")
