@@ -7,10 +7,10 @@
 score_mae(x)
 }
 \arguments{
-\item{x}{input dataframe. Should contain field: w, predCS and expCS.}
+\item{x}{input dataframe. Should contain field: weight, predCS and expCS.}
 }
 \description{
-This function a weighted (or reduced) mean-absolute-error (MAE)
+This function computes the weighted (or reduced) mean-absolute-error (MAE)
 }
 \examples{
 score_mae(x)

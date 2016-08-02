@@ -34,8 +34,8 @@ spearman_score <- function(x){
 score_mae <- function(x){
 	#' Weighted Mean Absolute Error Function
 	#'
-	#' This function a weighted (or reduced) mean-absolute-error (MAE)
-	#' @param x input dataframe. Should contain field: w, predCS and expCS.
+	#' This function computes the weighted (or reduced) mean-absolute-error (MAE)
+	#' @param x input dataframe. Should contain field: weight, predCS and expCS.
 	#' @export
 	#' @examples
 	#' score_mae(x)
@@ -46,8 +46,8 @@ score_mae <- function(x){
 score_rmse <- function(x){
 	#' Weighted Root Mean Squared Error Function
 	#'
-	#' This function a weighted (or reduced) root-mean-squared-error (RMSE)
-	#' @param x input dataframe. Should contain field: w, predCS and expCS.
+	#' This function computes the weighted (or reduced) root-mean-squared-error (RMSE)
+	#' @param x input dataframe. Should contain field: weight, predCS and expCS.
 	#' @export
 	#' @examples
 	#' score_rmse(x)
@@ -58,8 +58,8 @@ score_rmse <- function(x){
 score_flat_chi2 <- function(x, chi2_c = 1){
 	#' Weighted Flat Chi^2 Error Function
 	#'
-	#' This function a weighted (or reduced) flat Chi^2 error (return 1 - flat_chi2).
-	#' @param x input dataframe. Should contain field: w, predCS and expCS.
+	#' This function computes  the (or reduced) flat Chi^2 error (return 1 - flat_chi2).
+	#' @param x input dataframe. Should contain field: weight, predCS and expCS.
 	#' @param chi2_c double. The scaling factor for the error in the exponent.
 	#' @export
 	#' @examples
@@ -67,3 +67,15 @@ score_flat_chi2 <- function(x, chi2_c = 1){
 	x$error <- x$expCS - x$predCS	
 	return(mean(1-exp(-1.0*(x$weight*x$error/chi2_c)**2)))	
 }
+
+score_probability <- function(x){
+	#' Probability Error Function (similar to the Quality Score)
+	#'
+	#' This function computes the joint probability of observing the exhibited errors between measured and predicted chemical shifts
+	#' @param x input dataframe. Should contain field: weight, predCS and expCS.
+	#' @export
+	#' @examples
+	#' score_flat_chi2(x)
+	x$error <- x$expCS - x$predCS
+	x$sigma <- 1/x$weight	
+	return(1-prod((1/sqrt(2*x$sigma*x$sigma*pi))*exp(-1.0*(x$error/(sqrt(2)*x$sigma)**2))))}

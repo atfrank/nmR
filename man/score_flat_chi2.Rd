@@ -7,12 +7,12 @@
 score_flat_chi2(x, chi2_c = 1)
 }
 \arguments{
-\item{x}{input dataframe. Should contain field: w, predCS and expCS.}
+\item{x}{input dataframe. Should contain field: weight, predCS and expCS.}
 
 \item{chi2_c}{double. The scaling factor for the error in the exponent.}
 }
 \description{
-This function a weighted (or reduced) flat Chi^2 error (return 1 - flat_chi2).
+This function computes  the (or reduced) flat Chi^2 error (return 1 - flat_chi2).
 }
 \examples{
 score_flat_chi2(x)
