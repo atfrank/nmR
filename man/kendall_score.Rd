@@ -10,7 +10,7 @@ kendall_score(x)
 \item{x}{input dataframe. Should contain field: predCS and expCS.}
 }
 \description{
-This function computes the 1 - \tau
+This function computes the 1 - tau
 }
 \examples{
 kendall_score(x)

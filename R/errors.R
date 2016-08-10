@@ -1,7 +1,7 @@
 kendall_score <- function(x){
 	#' Kendall Correlation Scoring Function
 	#'
-	#' This function computes the 1 - \tau
+	#' This function computes the 1 - tau
 	#' @param x input dataframe. Should contain field: predCS and expCS.
 	#' @export
 	#' @examples
@@ -53,6 +53,21 @@ score_rmse <- function(x){
 	#' score_rmse(x)
   x$error <- x$expCS - x$predCS
 	return(sqrt(mean(x$weight*x$weight*x$error*x$error)))
+}
+
+score_huber <- function(x){
+	#' Pseudo-Huber Error Function
+	#'
+	#' This function a weighted (or reduced) root-mean-squared-error (RMSE)
+	#' @param x input dataframe. Should contain field: w, predCS and expCS.
+	#' @export
+	#' @examples
+	#' score_rmse(x)
+	delta <- 1/x$weight
+	delta2 < delta*delta
+  x$a <- x$expCS - x$predCS
+  
+	return(delta2*(sqrt(1+(a/delta)^2)-1))
 }
 
 score_flat_chi2 <- function(x, chi2_c = 1){
