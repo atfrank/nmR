@@ -15,7 +15,7 @@ random_nslr <- function(n_actives, n_total = 1000, cycles = 10000){
 
 	slrs <- NULL
 	for (i in 1:cycles){
-		slrs <- c(slrs, SLR(data[sample(1:nrow(data)),]))
+		slrs <- c(slrs, nslr(data[sample(1:nrow(data))$status,]))
 	}
 	mean(slrs)
 }

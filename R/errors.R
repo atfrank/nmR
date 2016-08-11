@@ -64,10 +64,10 @@ score_huber <- function(x){
 	#' @examples
 	#' score_rmse(x)
 	delta <- 1/x$weight
-	delta2 < delta*delta
-  x$a <- x$expCS - x$predCS
+	delta2 <- delta*delta
+  a <- x$expCS - x$predCS
   
-	return(delta2*(sqrt(1+(a/delta)^2)-1))
+	return(mean(delta2*(sqrt(1+(a/delta)^2)-1)))
 }
 
 score_flat_chi2 <- function(x, chi2_c = 1){
