@@ -1,4 +1,4 @@
-load_library <- function(package_name, repo='http://cran.mtu.edu/'){
+load_library <- function(package, repo='http://cran.mtu.edu/'){
 	#' Package Loader
 	#'
 	#' This function load a package if installed, and install then loads if not
@@ -8,8 +8,8 @@ load_library <- function(package_name, repo='http://cran.mtu.edu/'){
 	#' @examples
 	#' load_library(package_name='plyr')
 
-   if(package_name %in% rownames(installed.packages()) == FALSE) {install.packages(package_name,dep=TRUE,repos=repo)}
-   library(package_name)
+   if(package_name %in% rownames(installed.packages()) == FALSE) {install.packages(package,dep=TRUE,repos=repo)}
+   library(package)
 }
 
 update_package <- function(package_path='/Users/atfrank/GitSoftware/nmR', package_name='nmR'){
