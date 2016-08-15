@@ -5,7 +5,7 @@ score_kendall <- function(x){
 	#' @param x input dataframe. Should contain field: predCS and expCS.
 	#' @export
 	#' @examples
-	#' kendall_score(x)
+	#' score_kendall(x)
 	return(1-cor(x$expCS,x$predCS,method="kendall"))
 }
 
@@ -16,7 +16,7 @@ score_pearson <- function(x){
 	#' @param x input dataframe. Should contain field: predCS and expCS.
 	#' @export
 	#' @examples
-	#' pearson_score(x)
+	#' score_pearson(x)
 	return(1-cor(x$expCS,x$predCS,method="pearson"))
 }
 
@@ -27,7 +27,7 @@ score_spearman <- function(x){
 	#' @param x input dataframe. Should contain field: predCS and expCS.
 	#' @export
 	#' @examples
-	#' spearman_score(x)
+	#' score_spearman(x)
 	return(1-cor(x$expCS,x$predCS,method="spearman"))
 }
 

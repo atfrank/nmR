@@ -4,16 +4,16 @@
 \alias{load_library}
 \title{Load Package Function}
 \usage{
-load_library(package_name, repo = "http://cran.mtu.edu/")
+load_library(package, repo = "http://cran.mtu.edu/")
 
-load_library(package_name, repo = "http://cran.mtu.edu/")
+load_library(package, repo = "http://cran.mtu.edu/")
 }
 \arguments{
-\item{package_name}{name (string) of package}
+\item{package}{name of package to load.}
 
 \item{repo}{repository (string) to use when installing the package}
 
-\item{package}{name of package to load.}
+\item{package_name}{name (string) of package}
 }
 \description{
 This function loads a package if previous installed or install the package and then loads it.
