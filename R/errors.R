@@ -1,4 +1,4 @@
-kendall_score <- function(x){
+score_kendall <- function(x){
 	#' Kendall Correlation Scoring Function
 	#'
 	#' This function computes the 1 - tau
@@ -6,10 +6,10 @@ kendall_score <- function(x){
 	#' @export
 	#' @examples
 	#' kendall_score(x)
-	return(1-cor(x$expCS,x$pred,method="kendall"))
+	return(1-cor(x$expCS,x$predCS,method="kendall"))
 }
 
-pearson_score <- function(x){
+score_pearson <- function(x){
 	#' Pearson Correlation Scoring Function
 	#'
 	#' This function computes the 1 - R
@@ -17,10 +17,10 @@ pearson_score <- function(x){
 	#' @export
 	#' @examples
 	#' pearson_score(x)
-	return(1-cor(x$expCS,x$pred,method="pearson"))
+	return(1-cor(x$expCS,x$predCS,method="pearson"))
 }
 
-spearman_score <- function(x){
+score_spearman <- function(x){
 	#' Spearman Correlation Scoring Function
 	#'
 	#' This function computes the 1 - rho
@@ -28,7 +28,7 @@ spearman_score <- function(x){
 	#' @export
 	#' @examples
 	#' spearman_score(x)
-	return(1-cor(x$expCS,x$pred,method="spearman"))
+	return(1-cor(x$expCS,x$predCS,method="spearman"))
 }
 
 score_mae <- function(x){
