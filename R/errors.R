@@ -1,3 +1,19 @@
+geometric.mean <- function (x, na.rm = TRUE){
+  #' Geometric Mean Function
+  #'
+  #' The geometric mean is the nth root of n products or e to the mean log of x. (Copied from the "psych".)
+  #' @param x input dataframe.
+  #' @export
+  #' @examples
+  #' geometric.mean(x)
+  if (is.null(nrow(x))) {
+    exp(mean(log(x), na.rm = TRUE))
+  }
+  else {
+    exp(apply(log(x), 2, mean, na.rm = na.rm))
+  }
+}
+
 score_kendall <- function(x){
 	#' Kendall Correlation Scoring Function
 	#'
@@ -53,6 +69,18 @@ score_rmse <- function(x){
 	#' score_rmse(x)
   x$error <- x$expCS - x$predCS
 	return(sqrt(mean(x$weight*x$weight*x$error*x$error)))
+}
+
+score_geo_mae <- function(x){
+  #' Weighted Mean Absolute Error Function
+  #'
+  #' This function computes the weighted (or reduced) mean-absolute-error (MAE)
+  #' @param x input dataframe. Should contain field: weight, predCS and expCS.
+  #' @export
+  #' @examples
+  #' score_geo_mae(x)
+  x$error <- x$expCS - x$predCS
+  return(c(geometric.mean(abs(x$weight*x$error))))
 }
 
 score_huber <- function(x){
