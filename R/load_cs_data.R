@@ -1,4 +1,4 @@
-load_cs_data <- function(csfile, remove_assigned=FALSE, accuracyFile=NULL, cs_offset=NULL, residues=NULL, atomBasedWeights=FALSE, names=c("processor","model","resid","resname","nucleus","predCS","expCS","randCS","id")){
+ load_cs_data <- function(csfile, remove_assigned=FALSE, accuracyFile=NULL, cs_offset=NULL, residues=NULL, atomBasedWeights=FALSE, names=c("processor","model","resid","resname","nucleus","predCS","expCS","randCS","id")){
 	#' Chemical Shift Data Loading Function
 	#'
 	#' This function allows you to load chemical shift data from file
@@ -36,14 +36,14 @@ load_cs_data <- function(csfile, remove_assigned=FALSE, accuracyFile=NULL, cs_of
   if(!is.null(accuracyFile)){
 		# read in accuracy stats
 		accuracyFile <- read.table(accuracyFile, header = TRUE)  
-  	cs <- add_weights(cs, accuracyFile, atomBasedWeights)
+  	cs <- add_cs_weights(cs, accuracyFile, atomBasedWeights)
   }  
   
   # add offets
   if(!is.null(cs_offset)){
 		# read in accuracy stats
 		cs_offset <- read.table(cs_offset, col.names = c("resname", "nucleus", "offset"))  
-		cs <- add_offset(cs, cs_offset) 
+		cs <- add_cs_offset(cs, cs_offset) 
   }
 	return(cs)
 }
