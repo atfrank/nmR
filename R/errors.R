@@ -1,3 +1,36 @@
+correlation_kendall <- function(x){
+  #' Kendall Correlation Scoring Function
+  #'
+  #' This function computes the 1 - tau
+  #' @param x input dataframe. Should contain field: predCS and expCS.
+  #' @export
+  #' @examples
+  #' score_kendall(x)
+  return(data.frame(cor=cor(x$expCS,x$predCS,method="kendall"),N=nrow(x)))
+}
+
+correlation_pearson <- function(x){
+  #' Pearson Correlation Scoring Function
+  #'
+  #' This function computes the 1 - R
+  #' @param x input dataframe. Should contain field: predCS and expCS.
+  #' @export
+  #' @examples
+  #' score_pearson(x)
+  return(data.frame(cor=cor(x$expCS,x$predCS,method="pearson"),N=nrow(x)))
+}
+
+correlation_spearman <- function(x){
+  #' Spearman Correlation Scoring Function
+  #'
+  #' This function computes the 1 - rho
+  #' @param x input dataframe. Should contain field: predCS and expCS.
+  #' @export
+  #' @examples
+  #' score_spearman(x)
+  return(data.frame(cor=cor(x$expCS,x$predCS,method="spearman"),N=nrow(x)))
+}
+
 geometric.mean <- function (x, na.rm = TRUE){
   #' Geometric Mean Function
   #'

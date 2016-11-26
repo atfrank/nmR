@@ -2,6 +2,9 @@
 
 export(add_cs_offset)
 export(add_cs_weights)
+export(correlation_kendall)
+export(correlation_pearson)
+export(correlation_spearman)
 export(download_and_parse_bmrb)
 export(enrichment_factor)
 export(geometric.mean)
