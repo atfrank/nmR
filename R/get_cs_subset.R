@@ -1,4 +1,4 @@
-get_cs_subset <- function(cs_input, nuc="all"){
+ get_cs_subset <- function(cs_input, nuc="all"){
 	#' A Chemical Shift Selection Function
 	#'
 	#' This function allows you to select a subset of the chemical shift data based on nucleus type
@@ -11,7 +11,7 @@ get_cs_subset <- function(cs_input, nuc="all"){
 	#' get_cs_subset(cs, "baseCarbon")  
 	
 	nucleiGroups <- c("C1'","C2'","C3'","C4'","C5'","C2","C5","C6","C8","H1'","H2'","H3'","H4'","H5'","H5''","H2","H5","H6","H8")  
-	if(!(nuc %in% nucleiGroups)){
+	if((nuc %in% nucleiGroups)){
 		cs <- subset(cs_input,nucleus==nuc)
 	} else {
 		if(nuc=="all"){
