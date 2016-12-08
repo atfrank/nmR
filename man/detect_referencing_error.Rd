@@ -20,7 +20,7 @@ detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts,
 This function allows user to detect potential referencing errors by comparing observed and computed chemical shifts
 }
 \examples{
-add_cs_weights(cs, weights, residue_and_nucleus_based=TRUE)
-add_cs_weights(cs, weights, residue_and_nucleus_based=FALSE)
+detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=TRUE)
+detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
 }
 

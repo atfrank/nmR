@@ -2,6 +2,7 @@
 
 export(add_cs_offset)
 export(add_cs_weights)
+export(correct_referencing_error)
 export(correlation_kendall)
 export(correlation_pearson)
 export(correlation_spearman)
