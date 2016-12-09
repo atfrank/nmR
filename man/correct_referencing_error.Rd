@@ -5,7 +5,7 @@
 \title{Correct Referencing Errors}
 \usage{
 correct_referencing_error(observed_chemical_shifts, computed_chemical_shifts,
-  verbose = FALSE)
+  ratio_mean_sd = 3, threshold = -2, verbose = FALSE)
 }
 \arguments{
 \item{observed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS}

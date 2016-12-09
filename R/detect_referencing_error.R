@@ -22,8 +22,32 @@ detect_referencing_error <- function(observed_chemical_shifts, computed_chemical
 }
 
 
+accuracy_estimate <- function(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based = FALSE, verbose = FALSE){
+  #' Automated Referencing Error Detection Using Bayesian Regression
+  #'
+  #' This function allows user to detect potential referencing errors by comparing observed and computed chemical shifts
+  #' @param observed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS.
+  #' @param computed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS
+  #' @param residue_and_nucleus_based if TRUE, both residue type and nucleus are considered when detecting errors. Default considers only nucleus type
+  #' @param verbose if TRUE, print progress log from MCMCpack. Default is FALSE
+  #' @export
+  #' @examples
+  #' detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=TRUE)
+  #' detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
+  require(MCMCpack)
+  cs <- merge(observed_chemical_shifts, computed_chemical_shifts)
+  cs$secondary <- abs(cs$expCS - cs$predCS)
+  if (!residue_and_nucleus_based){
+    f <- MCMCregress(secondary~nucleus, data = cs, burnin = 1000, mcmc = 10000, thin = 1, verbose = verbose)
+  } else {
+    f <- MCMCregress(secondary~nucleus+resname, data = cs, burnin = 1000, mcmc = 10000, thin = 1, verbose = verbose)
+  }
+  return(summary(f))
+}
 
-correct_referencing_error <- function(observed_chemical_shifts, computed_chemical_shifts, verbose = FALSE){
+
+
+correct_referencing_error <- function(observed_chemical_shifts, computed_chemical_shifts, ratio_mean_sd = 3, threshold = -2, verbose = FALSE){
   #' Correct Referencing Errors
   #'
   #' This function allows user to detect potential referencing errors by comparing observed and computed chemical shifts
@@ -37,7 +61,7 @@ correct_referencing_error <- function(observed_chemical_shifts, computed_chemica
   err <- detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, FALSE, verbose)
   err <- as.data.frame(err$statistics)
   err$ratio <- abs(err$Mean/err$SD)
-  err <- err[((err$ratio>2) & (abs(err$Mean) > 1)),]
+  err <- err[((err$ratio > ratio_mean_sd) & (err$Mean < threshold)),]
   err <- err[!(rownames(err) %in% "sigma2"),]
   err$nucleus <- substr(rownames(err), 8, 12)
   err$Mean <- round(err$Mean, 3)
