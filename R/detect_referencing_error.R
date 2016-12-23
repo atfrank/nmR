@@ -12,6 +12,7 @@ detect_referencing_error <- function(observed_chemical_shifts, computed_chemical
   #' detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
   require(MCMCpack)
   cs <- merge(observed_chemical_shifts, computed_chemical_shifts)
+  cs <- subset(cs, expCS!=0)
   cs$secondary <- cs$expCS - cs$predCS
   if (!residue_and_nucleus_based){
     f <- MCMCregress(secondary~nucleus+0, data = cs, burnin = 1000, mcmc = 10000, thin = 1, verbose = verbose)
@@ -36,6 +37,7 @@ accuracy_estimate <- function(observed_chemical_shifts, computed_chemical_shifts
   #' detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
   require(MCMCpack)
   cs <- merge(observed_chemical_shifts, computed_chemical_shifts)
+  cs <- subset(cs, expCS!=0)
   cs$secondary <- abs(cs$expCS - cs$predCS)
   if (!residue_and_nucleus_based){
     f <- MCMCregress(secondary~nucleus, data = cs, burnin = 1000, mcmc = 10000, thin = 1, verbose = verbose)
