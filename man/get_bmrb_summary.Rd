@@ -14,4 +14,3 @@ get_bmrb_summary(ID, y)
 \description{
 prints of general info about the BMRB entry (e.g., temperature and pH)
 }
-

@@ -2,6 +2,7 @@
 % Please edit documentation in R/load_library.R, R/utility_functions.R
 \name{load_library}
 \alias{load_library}
+\alias{load_library}
 \title{Load Package Function}
 \usage{
 load_library(package, repo = "http://cran.mtu.edu/")
@@ -23,4 +24,3 @@ This function load a package if installed, and install then loads if not
 \examples{
 load_library(package_name='plyr')
 }
-

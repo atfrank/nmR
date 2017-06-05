@@ -15,4 +15,3 @@ This function computes the 1 - R
 \examples{
 score_pearson(x)
 }
-

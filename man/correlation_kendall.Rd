@@ -15,4 +15,3 @@ This function computes the 1 - tau
 \examples{
 score_kendall(x)
 }
-

@@ -15,4 +15,3 @@ This function computes the relative enrichment factor
 \examples{
 relative_enrichment_factor(sample(c(rep(0,100),rep(1,10))))
 }
-

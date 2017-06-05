@@ -30,4 +30,3 @@ This function allows you to load chemical shift data from file
 \examples{
 load_cs_data("data/predicted_shifts.txt")
 }
-

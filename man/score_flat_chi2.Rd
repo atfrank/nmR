@@ -17,4 +17,3 @@ This function computes  the (or reduced) flat Chi^2 error (return 1 - flat_chi2)
 \examples{
 score_flat_chi2(x)
 }
-

@@ -14,4 +14,3 @@ download_and_parse_bmrb(ID, verbose = FALSE)
 \description{
 download the BMRB file specified by ID and generate a chemical shift data frame
 }
-

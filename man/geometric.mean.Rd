@@ -15,4 +15,3 @@ The geometric mean is the nth root of n products or e to the mean log of x. (Cop
 \examples{
 geometric.mean(x)
 }
-

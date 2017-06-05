@@ -19,4 +19,3 @@ This function allows you to computes the error for each indiviudal model (or con
 \examples{
 random_nslr(10, n_total = 100, cycles = 1000)
 }
-

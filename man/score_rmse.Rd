@@ -15,4 +15,3 @@ This function computes the weighted (or reduced) root-mean-squared-error (RMSE)
 \examples{
 score_rmse(x)
 }
-

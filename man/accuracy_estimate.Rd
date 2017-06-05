@@ -10,7 +10,7 @@ accuracy_estimate(observed_chemical_shifts, computed_chemical_shifts,
 \arguments{
 \item{observed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS.}
 
-\item{computed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS}
+\item{computed_chemical_shifts}{computed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS}
 
 \item{residue_and_nucleus_based}{if TRUE, both residue type and nucleus are considered when detecting errors. Default considers only nucleus type}
 
@@ -23,4 +23,3 @@ This function allows user to detect potential referencing errors by comparing ob
 detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=TRUE)
 detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
 }
-

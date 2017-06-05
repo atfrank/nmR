@@ -19,4 +19,3 @@ This function allows you to compute a randomize normalized sum of logarithmic ra
 \examples{
 random_nslr(10, n_total = 100, cycles = 1000)
 }
-

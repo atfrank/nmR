@@ -23,4 +23,3 @@ This function allows user to detect potential referencing errors by comparing ob
 detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=TRUE)
 detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based=FALSE)
 }
-

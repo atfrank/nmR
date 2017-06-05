@@ -15,4 +15,3 @@ This function computes the 1 - rho
 \examples{
 score_spearman(x)
 }
-

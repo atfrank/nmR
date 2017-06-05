@@ -18,4 +18,3 @@ This function updates the package specified by package_path and package_name
 \examples{
 update_package(package_path='/Users/atfrank/GitSoftware/nmR', package_name='nmR')
 }
-

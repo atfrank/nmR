@@ -17,4 +17,3 @@ This function allows you to add an offset to chemical shift based on nucleus typ
 \examples{
 add_cs_offset(cs, offsets)
 }
-

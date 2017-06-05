@@ -15,4 +15,3 @@ This function computes the enrichment factor
 \examples{
 enrichment_factor(sample(c(rep(0,100),rep(1,10))))
 }
-

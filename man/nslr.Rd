@@ -15,4 +15,3 @@ This function allows you to compute the normalized sum of logarithmic ranks
 \examples{
 random_nslr(sample(c(rep(0,100),rep(1,10))))
 }
-

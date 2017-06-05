@@ -13,78 +13,49 @@ model_erorrs <- function(cs_input, errorType){
   # Args:
   #   x: dataframe with columns expCS and predCS -- data frame
   # Returns:
-  #		data frame with errors for each model (or conformer)  
-	if (errorType == "COR_p"){
-			means <- ddply(.data=cs_input, .var=c("model"),.fun=getCOR_p)
+  #		data frame with errors for each model (or conformer) 
+  require(plyr)
+  errorType <- tolower(errorType)
+	if (errorType == "cor_p"){
+			means <- ddply(.data=cs_input, .var=c("model"),.fun=score_pearson)
 	}
-	if (errorType == "COR_s"){
-			means <- ddply(.data=cs_input, .var=c("model"),.fun=getCOR_s)
+	if (errorType == "cor_s"){
+			means <- ddply(.data=cs_input, .var=c("model"),.fun=score_spearman)
 	}
-	if (errorType == "COR_k"){
-			means <- ddply(.data=cs_input, .var=c("model"),.fun=getCOR_k)
+	if (errorType == "cor_k"){
+			means <- ddply(.data=cs_input, .var=c("model"),.fun=score_kendall)
 	}
-	if (errorType == "RMSE"){
-			means <- ddply(cs_input, c("model"), .fun=getRMSE)
+	if (errorType == "mae"){
+			means <- ddply(cs_input, c("model"), .fun=score_mae)
 	}
-	if (errorType == "MAE"){
-			means <- ddply(cs_input, c("model"), .fun=getMAE)
-	}
-	if (errorType == "rRMSE"){
-			means <- ddply(cs_input, c("model"), .fun=getrRMSE)
-	}
-	if (errorType == "rMAE"){
-			means <- ddply(cs_input, c("model"), .fun=getrMAE)
-	}
-	if (errorType == "LOGIC"){
-			means <- ddply(cs_input, c("model"), .fun=getLOGIC)
-	}
-	if (errorType == "rMAE_COR_k"){
-			means <- ddply(cs_input, c("model"), .fun=getrMAE_COR_k)
-	}
-	if (errorType == "rRMSE_COR_k"){
-			means <- ddply(cs_input, c("model"), .fun=getrRMSE_COR_k)
-	}
-	if (errorType == "flatChi2_3_COR_k"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2_3_COR_k)
-	}	
-
-	if (errorType == "rMAE_COR_p"){
-			means <- ddply(cs_input, c("model"), .fun=getrMAE_COR_p)
-	}
-	if (errorType == "rRMSE_COR_p"){
-			means <- ddply(cs_input, c("model"), .fun=getrRMSE_COR_p)
-	}
-	if (errorType == "flatChi2_3_COR_p"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2_3_COR_p)
-	}	
-	if (errorType == "rMAE_COR_s"){
-			means <- ddply(cs_input, c("model"), .fun=getrMAE_COR_s)
-	}
-	if (errorType == "rRMSE_COR_s"){
-			means <- ddply(cs_input, c("model"), .fun=getrRMSE_COR_s)
-	}
-	if (errorType == "flatChi2_3_COR_s"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2_3_COR_s)
-	}	
-
-	if (errorType == "flatChi2_0.125"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 0.125)
+	if (errorType == "rmse"){
+			means <- ddply(cs_input, c("model"), .fun=score_rmse)
 	}
 
-	if (errorType == "flatChi2_0.25"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 0.25)
+	if (errorType == "geo_mae"){
+			means <- ddply(cs_input, c("model"), .fun=score_geo_mae)
+	}
+  if (errorType == "prob"){
+    means <- ddply(cs_input, c("model"), .fun=score_probability)
+  }
+  
+	if (errorType == "flatchi2_0.25"){
+			means <- ddply(cs_input, c("model"), .fun=score_flat_chi2, chi2_c = 0.25)
 	}	
-	if (errorType == "flatChi2_0.5"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 0.5)
+	if (errorType == "flatchi2_0.5"){
+			means <- ddply(cs_input, c("model"), .fun=score_flat_chi2, chi2_c = 0.5)
 	}
-	if (errorType == "flatChi2_1"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 1)
+	if (errorType == "flatchi2_1"){
+			means <- ddply(cs_input, c("model"), .fun=score_flat_chi2, chi2_c = 1)
 	}
-	if (errorType == "flatChi2_2"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 2)
+	if (errorType == "flatchi2_2"){
+			means <- ddply(cs_input, c("model"), .fun=score_flat_chi2, chi2_c = 2)
 	}
 	if (errorType == "flatChi2_3"){
-			means <- ddply(cs_input, c("model"), .fun=getflatChi2, chi2_c = 3)
+			means <- ddply(cs_input, c("model"), .fun=score_flat_chi2, chi2_c = 3)
 	}
+  
+  colnames(means) <- c("model", "error")
 	return(means)
+  
 }

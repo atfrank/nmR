@@ -20,4 +20,3 @@ This function allows user to detect potential referencing errors by comparing ob
 \examples{
 correct_referencing_error(observed_chemical_shifts, computed_chemical_shifts)
 }
-

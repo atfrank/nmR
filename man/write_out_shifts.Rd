@@ -32,4 +32,3 @@ write_out_shifts(y, rnaOnly = TRUE, listID = NULL, offset = offset,
 \description{
 writes out chemcial shift dataframe to file
 }
-

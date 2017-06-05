@@ -22,13 +22,12 @@ detect_referencing_error <- function(observed_chemical_shifts, computed_chemical
   return(summary(f))
 }
 
-
 accuracy_estimate <- function(observed_chemical_shifts, computed_chemical_shifts, residue_and_nucleus_based = FALSE, verbose = FALSE){
   #' Automated Referencing Error Detection Using Bayesian Regression
   #'
   #' This function allows user to detect potential referencing errors by comparing observed and computed chemical shifts
   #' @param observed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS.
-  #' @param computed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS
+  #' @param computed_chemical_shifts computed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS
   #' @param residue_and_nucleus_based if TRUE, both residue type and nucleus are considered when detecting errors. Default considers only nucleus type
   #' @param verbose if TRUE, print progress log from MCMCpack. Default is FALSE
   #' @export
@@ -46,8 +45,6 @@ accuracy_estimate <- function(observed_chemical_shifts, computed_chemical_shifts
   }
   return(summary(f))
 }
-
-
 
 correct_referencing_error <- function(observed_chemical_shifts, computed_chemical_shifts, ratio_mean_sd = 3, threshold = -2, verbose = FALSE){
   #' Correct Referencing Errors

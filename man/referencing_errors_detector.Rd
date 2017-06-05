@@ -16,4 +16,3 @@ referencing_errors_detector(input, first = NULL, last = NULL)
 \description{
 Identifies whether 13C chemical shift data is systematically shifted. Use the chemical shifts of the a terminal G:C base pair and compare to refernce values
 }
-

@@ -15,4 +15,3 @@ This function computes the joint probability of observing the exhibited errors b
 \examples{
 score_flat_chi2(x)
 }
-

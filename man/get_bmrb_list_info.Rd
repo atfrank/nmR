@@ -12,4 +12,3 @@ get_bmrb_list_info(y)
 \description{
 counting chemcial shift lists
 }
-

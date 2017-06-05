@@ -20,4 +20,3 @@ This function allows you to add weights chemical shift data
 add_cs_weights(cs, weights, atomBasedWeights=FALSE)
 add_cs_weights(cs, weights, atomBasedWeights=TRUE)
 }
-

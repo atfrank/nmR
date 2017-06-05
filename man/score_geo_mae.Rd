@@ -15,4 +15,3 @@ This function computes the weighted (or reduced) mean-absolute-error (MAE)
 \examples{
 score_geo_mae(x)
 }
-
