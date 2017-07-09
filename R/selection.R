@@ -1,18 +1,6 @@
 # (0) set working directory
 setwd("~/GitSoftware/nmR/")
 
-compute_chemical_shifts <- function(w, X){
-  # Helper function to compute the chemical shifts
-  # Args:
-  #   w: weights -- vector 
-  #   X: data matrix of features -- data matrix
-  # Returns:
-  #   returns: the computed chemical shifts shifts as weighted sum
-  MX = nrow(X)
-  NX = ncol(X)
-  .rowSums(matrix(c(w),byrow=T,nrow=MX,ncol=NX)*X,MX,NX)/NX
-}
-
 compute_chemical_shifts <- function(w,X){
   # Helper function to compute the chemical shifts
   # Args:
@@ -33,11 +21,11 @@ fitness <- function(w, mask = NULL){
   #   returns: correlation coefficient between target and ensemble-averaged chemical shifts
   w <- w/sum(w)
   if (!is.null(mask)){w[mask] <- 0}
-  ensemble_averaged <- compute_chemical_shifts(w, ensemble) 
-  return(-mean(abs(ensemble_averaged-target))-10*(sum(w)))
+  ensemble_averaged <- compute_chemical_shifts(w, ensemble)
+  return(-mean(abs(ensemble_averaged-target))-10*(sum(w))) # Note that this is a L1 regularized optimization
 }
 
-runGA <- function(target, ensemble, cycles = 100, population_size = 25, seed = 12345){
+runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE){
   require(GA)
   # Helper function that runs GA regression to general refined parameters for model
   # Args:
@@ -49,17 +37,18 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 25, seed = 1
   # Returns:
   #   returns: resulting model parameters -- data frame
   ensemble_size <- ncol(ensemble)
-  GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, seed = seed, popSize = population_size, maxiter = cycles, keepBest = TRUE, mask = 1:4)
+  if (binary){
+    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=20000)
+  } else {
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=20000)
+  }
   return(GA)
 }
-
 
 # (1) load library
 library(nmR)
 target <- as.matrix.data.frame(read.table("data/observed_vector.txt"))
 ensemble <- as.matrix.data.frame(read.table("data/predicted_matrix.txt"))
+GA <- runGA(target, ensemble, binary = TRUE)
 rmsd <- read.table("data/1SCL.txt")
-
-#GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = 100, maxiter=100)
-GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = 25, maxiter=20000, mask = 1:4)
 rmsd$sel <- as.vector(GA@solution)/max(as.vector(GA@solution))
