@@ -38,9 +38,9 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 
   #   returns: resulting model parameters -- data frame
   ensemble_size <- ncol(ensemble)
   if (binary){
-    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=20000)
+    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=20000)
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles)
   }
   return(GA)
 }
@@ -49,6 +49,6 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 
 library(nmR)
 target <- as.matrix.data.frame(read.table("data/observed_vector.txt"))
 ensemble <- as.matrix.data.frame(read.table("data/predicted_matrix.txt"))
-GA <- runGA(target, ensemble, binary = TRUE)
+GA <- runGA(target, ensemble, binary = FALSE, cycles = 100000)
 rmsd <- read.table("data/1SCL.txt")
 rmsd$sel <- as.vector(GA@solution)/max(as.vector(GA@solution))
