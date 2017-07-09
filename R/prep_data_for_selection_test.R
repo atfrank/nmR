@@ -10,7 +10,7 @@ expcs <-  nmR::load_cs_data(csfile="data/observed_shifts_corrected_larmord_1SCL.
 
 # (3) merge chemical shift data
 cs <- merge(expcs, predcs, by = c("resname", "resid", "nucleus"))
-cs <- cs[order(cs$conformation, cs$resid, cs$resname, cs$nucleus),]
+cs <- cs[order(cs$resid, cs$resname, cs$nucleus, cs$conformation),] # the be careful here; inspect the files written out below to ensure they correspond with your expectations
 
 # (4) write out vector, corresponding to observed shifts and matrix, corresponding to predict shifts
 tmp <- subset(cs, conformation==1)
