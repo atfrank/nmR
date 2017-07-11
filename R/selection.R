@@ -40,17 +40,18 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 
   if (binary){
     GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles, weights = weights)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter = cycles, weights = weights)
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter = cycles, weights = weights)
   }
   return(GA)
 }
 
 # (1) load library
 library(nmR)
-target <- as.matrix.data.frame(read.table("data/observed_vector.txt"))
-ensemble <- as.matrix.data.frame(read.table("data/predicted_matrix.txt"))
-weights <- as.matrix.data.frame(read.table("data/weights_vector.txt"))
+rna <- "1KKA"
+target <- as.matrix.data.frame(read.table(paste("data/observed_vector_", rna, ".txt", sep = "")))
+ensemble <- as.matrix.data.frame(read.table(paste("data/predicted_matrix_", rna, ".txt", sep = "")))
+weights <- as.matrix.data.frame(read.table(paste("data/weights_vector_", rna, ".txt", sep = "")))
 
-GA <- runGA(target, ensemble, binary = FALSE, cycles = 5000, weights = weights)
-rmsd <- read.table("data/1SCL.txt")
+GA <- runGA(target, ensemble, binary = TRUE, cycles = 5000, weights = weights)
+rmsd <- read.table(paste("data/", rna, ".txt", sep = ""))
 rmsd$sel <- as.vector(GA@solution)/max(as.vector(GA@solution))
