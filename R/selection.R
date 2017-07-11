@@ -13,7 +13,7 @@ compute_chemical_shifts <- function(w,X){
   .rowSums(matrix(c(w),byrow=T,nrow=MX,ncol=NX)*X,MX,NX)
 }
 
-fitness <- function(w, mask = NULL){
+fitness <- function(w, mask = NULL, weights = 1){
   # Helper function to the overall fitness for GA
   # Args:
   #   w: weights -- vector
@@ -22,10 +22,10 @@ fitness <- function(w, mask = NULL){
   w <- w/sum(w)
   if (!is.null(mask)){w[mask] <- 0}
   ensemble_averaged <- compute_chemical_shifts(w, ensemble)
-  return(-mean(abs(ensemble_averaged-target))-10*(sum(w))) # Note that this is a L1 regularized optimization
+  return(-mean(weights*abs(ensemble_averaged-target))-10*(sum(w))) # Note that this is a L1 regularized optimization
 }
 
-runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE){
+runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1){
   require(GA)
   # Helper function that runs GA regression to general refined parameters for model
   # Args:
@@ -38,9 +38,9 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 
   #   returns: resulting model parameters -- data frame
   ensemble_size <- ncol(ensemble)
   if (binary){
-    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles)
+    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles, weights = weights)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles)
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0,25), max = rep(1,25), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter = cycles, weights = weights)
   }
   return(GA)
 }
@@ -49,6 +49,8 @@ runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 
 library(nmR)
 target <- as.matrix.data.frame(read.table("data/observed_vector.txt"))
 ensemble <- as.matrix.data.frame(read.table("data/predicted_matrix.txt"))
-GA <- runGA(target, ensemble, binary = FALSE, cycles = 100000)
+weights <- as.matrix.data.frame(read.table("data/weights_vector.txt"))
+
+GA <- runGA(target, ensemble, binary = FALSE, cycles = 5000, weights = weights)
 rmsd <- read.table("data/1SCL.txt")
 rmsd$sel <- as.vector(GA@solution)/max(as.vector(GA@solution))
