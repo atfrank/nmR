@@ -1,57 +1,58 @@
-# (0) set working directory
-setwd("~/GitSoftware/nmR/")
-
-compute_chemical_shifts <- function(w,X){
-  # Helper function to compute the chemical shifts
-  # Args:
-  #   w: weights -- vector 
-  #   X: data matrix of features -- data matrix
-  # Returns:
-  #   returns: the computed chemical shifts shifts as weighted sum
+get_ensemble_average <- function(w, X){
+  #' Ensemble Averaging Function
+  #'
+  #' This function compute ensemble-averaged of X using w
+  #' @author Aaron T. Frank
+  #' @param w weights vector 
+  #' @param X data matrix to be averaged
+  #' @export
+  #' @examples
+  #' get_ensemble_average(w, X)  
   MX = nrow(X)
   NX = ncol(X)
   .rowSums(matrix(c(w),byrow=T,nrow=MX,ncol=NX)*X,MX,NX)
 }
 
-fitness <- function(w, mask = NULL, weights = 1){
-  # Helper function to the overall fitness for GA
-  # Args:
-  #   w: weights -- vector
-  # Returns:
-  #   returns: correlation coefficient between target and ensemble-averaged chemical shifts
-  w <- w/sum(w)
-  if (!is.null(mask)){w[mask] <- 0}
-  ensemble_averaged <- compute_chemical_shifts(w, ensemble)
-  return(-mean(weights*abs(ensemble_averaged-target))-10*(sum(w))) # Note that this is a L1 regularized optimization
+fitness <- function(p, mask = NULL, weights = 1, alpha = 10){
+  #' GA Fitness Function
+  #'
+  #' This function compute ensemble-averaged of X using w
+  #' @author Aaron T. Frank
+  #' @param p GA parameters (vector)
+  #' @param mask mask certain parameters (vector)
+  #' @param alpha coefficient to L1 regularization term
+  #' @export
+  #' @examples
+  #' fitness(p)  
+  p <- p/sum(p)
+  if (!is.null(mask)){p[mask] <- 0}
+  ensemble_averaged <- get_ensemble_average(p, ensemble)
+  return(-mean(weights*abs(ensemble_averaged-target))-alpha*(sum(p))) # Note that this is a L1 regularized optimization
 }
 
-runGA <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1){
+run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1, monitor = FALSE){
   require(GA)
-  # Helper function that runs GA regression to general refined parameters for model
-  # Args:
-  #   target: actual data -- vector
-  #   ensemble: matrix of predicted data -- number of columns correspond to the number of ensemble members and rows the number sample points in the target data
-  #   cycles (optional): optimization cycles -- integer
-  #   populationSize (optional): population or number of solutions to evolve -- integer
-  #   seed: random number seed -- double  
-  # Returns:
-  #   returns: resulting model parameters -- data frame
+  #' GA Optimization Function
+  #'
+  #' This function runs GA optimizations
+  #' @author Aaron T. Frank
+  #' @param target Actual data (vector)
+  #' @param ensemble Matrix of predicted data. Number of columns correspond to the number of ensemble members and rows the number sample points in the target data.
+  #' @param alpha Coefficient to L1 regularization term
+  #' @param cycles GA optimization cycles (integer)
+  #' @param population_size GA population size (integer)
+  #' @param seed Seed for random number generator
+  #' @param binary Run binary selection mode?
+  #' @param weights Weights used to individual data points
+  #' @param monitor Print progress?
+  #' @export
+  #' @examples
+  #' fitness(p)  
   ensemble_size <- ncol(ensemble)
   if (binary){
-    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor=TRUE, popSize = population_size, maxiter=cycles, weights = weights)
+    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor=TRUE, popSize = population_size, maxiter = cycles, weights = weights)
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights)
   }
   return(GA)
 }
-
-# (1) load library
-library(nmR)
-rna <- "1KKA"
-target <- as.matrix.data.frame(read.table(paste("data/observed_vector_", rna, ".txt", sep = "")))
-ensemble <- as.matrix.data.frame(read.table(paste("data/predicted_matrix_", rna, ".txt", sep = "")))
-weights <- as.matrix.data.frame(read.table(paste("data/weights_vector_", rna, ".txt", sep = "")))
-
-GA <- runGA(target, ensemble, binary = TRUE, cycles = 5000, weights = weights)
-rmsd <- read.table(paste("data/", rna, ".txt", sep = ""))
-rmsd$sel <- as.vector(GA@solution)/max(as.vector(GA@solution))

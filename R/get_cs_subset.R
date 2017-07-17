@@ -2,6 +2,7 @@
 	#' A Chemical Shift Selection Function
 	#'
 	#' This function allows you to select a subset of the chemical shift data based on nucleus type
+	#' @author Aaron T. Frank
 	#' @param cs_input chemical shift dataframe
 	#' @param nuc name of nucleus type to select
 	#' @export
