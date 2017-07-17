@@ -19,3 +19,6 @@ get_cs_subset(cs, "H1'")
 get_cs_subset(cs, "all")  
 get_cs_subset(cs, "baseCarbon")  
 }
+\author{
+Aaron T. Frank
+}
