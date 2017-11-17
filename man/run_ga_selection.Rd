@@ -5,7 +5,8 @@
 \title{GA Optimization Function}
 \usage{
 run_ga_selection(target, ensemble, cycles = 100, population_size = 100,
-  seed = 12345, binary = TRUE, weights = 1, monitor = FALSE)
+  seed = 12345, binary = TRUE, weights = 1, monitor = FALSE,
+  alpha = 10)
 }
 \arguments{
 \item{target}{Actual data (vector)}

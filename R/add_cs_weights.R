@@ -23,7 +23,7 @@ add_cs_weights <- function(cs_input, weights, atomBasedWeights=FALSE){
 		}
 	} else {
 		for (n in weights$nucleus){
-			cs_input$weight[cs_input$nucleus==n] <- mean(subset(weights,(nucleus==n))$weight)
+		  cs_input$weight[cs_input$nucleus==n] <- mean(subset(weights,(nucleus==n))$weight)
 		}
 	}	
 	cs_input$weight <- 1/(cs_input$weight)

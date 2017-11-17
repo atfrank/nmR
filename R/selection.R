@@ -30,7 +30,7 @@ fitness <- function(p, mask = NULL, weights = 1, alpha = 10){
   return(-mean(weights*abs(ensemble_averaged-target))-alpha*(sum(p))) # Note that this is a L1 regularized optimization
 }
 
-run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1, monitor = FALSE){
+run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1, monitor = FALSE, alpha = 10){
   require(GA)
   #' GA Optimization Function
   #'
@@ -50,9 +50,9 @@ run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 1
   #' fitness(p)  
   ensemble_size <- ncol(ensemble)
   if (binary){
-    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights)
+    GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights, alpha = alpha)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights)
+    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights, alpha = alpha)
   }
   return(GA)
 }

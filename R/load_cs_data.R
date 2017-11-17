@@ -32,13 +32,14 @@
 	cs <- subset(cs,!((resname=="URA")&(nucleus=="C2")))
 	cs <- subset(cs,!((resname=="CYT")&(nucleus=="C2")))	
 	
+	
   # add differential error weights to carbon and proton nuclei
   if(!is.null(accuracyFile)){
 		# read in accuracy stats
 		accuracyFile <- read.table(accuracyFile, header = TRUE)  
   	cs <- add_cs_weights(cs, accuracyFile, atomBasedWeights)
   }  
-  
+	
   # add offets
   if(!is.null(cs_offset)){
 		# read in accuracy stats
