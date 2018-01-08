@@ -83,7 +83,7 @@ create_residue_tocsy_peaks <- function(cs){
   p1_nam <- c(p1_nam,"H5'","H5'","H5'","H5'","H1'","H2'","H3'","H4'")
   p2_nam <- c(p2_nam,"H1'","H2'","H3'","H4'","H5'","H5'","H5'","H5'")
 
-  resname <- unique(x$resname)
+  resname <- unique(cs$resname)
   if (resname =="URA" || resname == "CYT"){
     p1 <- c(p1,h5,h6)
     p2 <- c(p2,h6,h5)
@@ -107,11 +107,11 @@ create_residue_tocsy_peaks <- function(cs){
   nuc <- c("C1'","C2'","C3'","C4'","C5'","C2","C5","C6","C8")
   nuc_name <- c("c1p","c2p","c3p","c4p","c5p","c2","c5","c6","c8")
   for (i in seq_along(nuc_name)){
-    if(nrow(subset(x,nucleus==nuc[i]))<1){
+    if(nrow(subset(cs,nucleus==nuc[i]))<1){
       assign(nuc_name[i], 9999)
     }
     else {
-      assign(nuc_name[i],subset(x,nucleus==nuc[i])$predCS[1])
+      assign(nuc_name[i],subset(cs,nucleus==nuc[i])$predCS[1])
     }
   }
   p1 <- p2 <- p1_nam <- p2_nam <- NULL
@@ -145,7 +145,7 @@ create_residue_tocsy_peaks <- function(cs){
   p1_nam <- c(p1_nam,"C5'","C5'","C5'","C5'","C1'","C2'","C3'","C4'")
   p2_nam <- c(p2_nam,"C1'","C2'","C3'","C4'","C5'","C5'","C5'","C5'")
 
-  resname <- unique(x$resname)
+  resname <- unique(cs$resname)
   if (resname =="URA" || resname == "CYT"){
     p1 <- c(p1,c5,c6)
     p2 <- c(p2,c6,c5)
@@ -194,7 +194,7 @@ create_residue_cosy_peaks<- function(cs){
   p1_nam <- c("H1'","H2'","H2'","H3'","H3'","H4'","H4'","H5'")
   p2_nam <- c("H2'","H1'","H3'","H2'","H4'","H3'","H5'","H4'")
 
-  resname <- unique(x$resname)
+  resname <- unique(cs$resname)
   if (resname =="URA" || resname == "CYT"){
     p1 <- c(p1,h5,h6)
     p2 <- c(p2,h6,h5)
@@ -210,11 +210,11 @@ create_residue_cosy_peaks<- function(cs){
   nuc <- c("C1'","C2'","C3'","C4'","C5'","C2","C5","C6","C8")
   nuc_name <- c("c1p","c2p","c3p","c4p","c5p","c2","c5","c6","c8")
   for (i in seq_along(nuc_name)){
-    if(nrow(subset(x,nucleus==nuc[i]))<1){
+    if(nrow(subset(cs,nucleus==nuc[i]))<1){
       assign(nuc_name[i], 9999)
     }
     else {
-      assign(nuc_name[i],subset(x,nucleus==nuc[i])$predCS[1])
+      assign(nuc_name[i],subset(cs,nucleus==nuc[i])$predCS[1])
     }
   }
   p1 <- p2 <- NULL
@@ -224,7 +224,7 @@ create_residue_cosy_peaks<- function(cs){
   p1_nam <- c("C1'","C2'","C2'","C3'","C3'","C4'","C4'","C5'")
   p2_nam <- c("C2'","C1'","C3'","C2'","C4'","C3'","C5'","C4'")
 
-  resname <- unique(x$resname)
+  resname <- unique(cs$resname)
   if (resname =="URA" || resname == "CYT"){
     p1 <- c(p1,c5,c6)
     p2 <- c(p2,c6,c5)
