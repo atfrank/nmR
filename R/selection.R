@@ -52,7 +52,7 @@ run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 1
   if (binary){
     GA <- ga(parallel = FALSE, type = "binary", nBits = ensemble_size, fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights, alpha = alpha)
   } else {
-    GA <- ga(parallel = FALSE, type = "real-valued", min = rep(0, ensemble_size), max = rep(1, ensemble_size), fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights, alpha = alpha)
+    GA <- ga(parallel = FALSE, type = "real-valued", lower = rep(0, ensemble_size), upper = rep(1, ensemble_size), fitness = fitness, monitor = monitor, popSize = population_size, maxiter = cycles, weights = weights, alpha = alpha)
   }
   return(GA)
 }
