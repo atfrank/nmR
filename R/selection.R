@@ -30,7 +30,7 @@ fitness <- function(p, mask = NULL, weights = 1, alpha = 10){
   return(-mean(weights*abs(ensemble_averaged-target))-alpha*(sum(p>0.01))) # Note that this is a L1 regularized optimization
 }
 
-run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1, monitor = FALSE, alpha = 10){
+run_ga_selection <- function(target, ensemble, cycles = 100, population_size = 100, seed = 12345, binary = TRUE, weights = 1, mask = NULL, monitor = FALSE, alpha = 10){
   require(GA)
   #' GA Optimization Function
   #'
