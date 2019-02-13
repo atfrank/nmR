@@ -17,7 +17,7 @@ fitness(p, mask = NULL, weights = 1, alpha = 10)
 This function compute ensemble-averaged of X using w
 }
 \examples{
-fitness(p)  
+fitness(p)
 }
 \author{
 Aaron T. Frank

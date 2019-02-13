@@ -23,9 +23,9 @@ fitness <- function(p, mask = NULL, weights = 1, alpha = 10){
   #' @param alpha coefficient to L1 regularization term
   #' @export
   #' @examples
-  #' fitness(p)  
+  #' fitness(p)
+  if (!is.null(mask)){p[mask==0] <- 0}
   p <- p/sum(p)
-  if (!is.null(mask)){p[mask] <- 0}
   ensemble_averaged <- get_ensemble_average(p, ensemble)
   return(-mean(weights*abs(ensemble_averaged-target))-alpha*(sum(p>0.01))) # Note that this is a L1 regularized optimization
 }
