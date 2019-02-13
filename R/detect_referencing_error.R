@@ -53,7 +53,7 @@ correct_referencing_error <- function(observed_chemical_shifts, computed_chemica
   #' @param observed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS
   #' @param computed_chemical_shifts observed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS
   #' @param ratio_mean_sd ratio of mean to sd of the error. 
-  #' @param threshold cutoff to use of identify systematic errors: entries with errors.
+  #' @param threshold cutoff to use for identifying systematic errors.
   #' @param verbose if TRUE, print progress log from MCMCpack. Default is FALSE
   #' @export
   #' @examples

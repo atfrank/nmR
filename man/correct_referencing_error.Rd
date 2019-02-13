@@ -15,7 +15,7 @@ correct_referencing_error(observed_chemical_shifts,
 
 \item{ratio_mean_sd}{ratio of mean to sd of the error.}
 
-\item{threshold}{cutoff to use of identify systematic errors: entries with errors.}
+\item{threshold}{cutoff to use for identifying systematic errors.}
 
 \item{verbose}{if TRUE, print progress log from MCMCpack. Default is FALSE}
 }

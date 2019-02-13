@@ -9,7 +9,7 @@ git clone git@github.com:atfrank/nmR.git
 
 # Open R and install package
 R
-install.packages("devtools", dependencies = TRUE, repos = "http://cran.us.r-project.org")
+install.packages("devtools", repos = "http://cran.us.r-project.org")
 library("devtools")
 setwd(download_location)
 install("nmR")
