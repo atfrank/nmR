@@ -4,8 +4,9 @@
 \alias{detect_referencing_error}
 \title{Automated Referencing Error Detection Using Bayesian Regression}
 \usage{
-detect_referencing_error(observed_chemical_shifts, computed_chemical_shifts,
-  residue_and_nucleus_based = FALSE, verbose = FALSE)
+detect_referencing_error(observed_chemical_shifts,
+  computed_chemical_shifts, residue_and_nucleus_based = FALSE,
+  verbose = FALSE)
 }
 \arguments{
 \item{observed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS.}

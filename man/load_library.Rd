@@ -2,7 +2,6 @@
 % Please edit documentation in R/load_library.R, R/utility_functions.R
 \name{load_library}
 \alias{load_library}
-\alias{load_library}
 \title{Load Package Function}
 \usage{
 load_library(package, repo = "http://cran.mtu.edu/")

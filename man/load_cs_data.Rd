@@ -6,8 +6,8 @@
 \usage{
 load_cs_data(csfile, remove_assigned = FALSE, accuracyFile = NULL,
   cs_offset = NULL, residues = NULL, atomBasedWeights = FALSE,
-  names = c("processor", "model", "resid", "resname", "nucleus", "predCS",
-  "expCS", "randCS", "id"))
+  names = c("processor", "model", "resid", "resname", "nucleus",
+  "predCS", "expCS", "randCS", "id"))
 }
 \arguments{
 \item{csfile}{input file name}

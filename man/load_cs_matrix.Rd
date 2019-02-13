@@ -5,9 +5,9 @@
 \title{Chemical Shift Matrix Loading Function}
 \usage{
 load_cs_matrix(csfile, skip = 1, cs_offset = NULL, residues = NULL,
-  names = c("resid", "resname", "C1'", "C2'", "C3'", "C4'", "C5'", "C2", "C5",
-  "C6", "C8", "H1'", "H2'", "H3'", "H4'", "H2", "H5", "H5'", "H5''", "H6", "H8",
-  "H1", "H3", "N1", "N3"))
+  names = c("resid", "resname", "C1'", "C2'", "C3'", "C4'", "C5'", "C2",
+  "C5", "C6", "C8", "H1'", "H2'", "H3'", "H4'", "H2", "H5", "H5'", "H5''",
+  "H6", "H8", "H1", "H3", "N1", "N3"))
 }
 \arguments{
 \item{csfile}{input file name}

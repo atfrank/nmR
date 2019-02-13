@@ -4,10 +4,10 @@
 \alias{create_peaks}
 \title{Peaks Generation Function}
 \usage{
-create_peaks(cs, type = "hmqc", grouping = c("model", "resid", "resname"),
-  protons = c("H1'", "H2'", "H3'", "H4'", "H5'", "H5''", "H2", "H5", "H6",
-  "H8"), carbons = c("C1'", "C2'", "C3'", "C4'", "C5'", "C5'", "C2", "C5",
-  "C6", "C8"))
+create_peaks(cs, type = "hmqc", grouping = c("model", "resid",
+  "resname"), protons = c("H1'", "H2'", "H3'", "H4'", "H5'", "H5''",
+  "H2", "H5", "H6", "H8"), carbons = c("C1'", "C2'", "C3'", "C4'", "C5'",
+  "C5'", "C2", "C5", "C6", "C8"))
 }
 \arguments{
 \item{cs}{input chemical shift dataframe. Should contain field: model, resid, nucleus, weight, and predCS}

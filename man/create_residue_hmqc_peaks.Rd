@@ -4,9 +4,9 @@
 \alias{create_residue_hmqc_peaks}
 \title{HMQC Peaks Generation Helper Function}
 \usage{
-create_residue_hmqc_peaks(cs, protons = c("H1'", "H2'", "H3'", "H4'", "H5'",
-  "H5''", "H2", "H5", "H6", "H8"), carbons = c("C1'", "C2'", "C3'", "C4'",
-  "C5'", "C5'", "C2", "C5", "C6", "C8"))
+create_residue_hmqc_peaks(cs, protons = c("H1'", "H2'", "H3'", "H4'",
+  "H5'", "H5''", "H2", "H5", "H6", "H8"), carbons = c("C1'", "C2'",
+  "C3'", "C4'", "C5'", "C5'", "C2", "C5", "C6", "C8"))
 }
 \arguments{
 \item{cs}{input chemical shift dataframe. Should contain field: model, resid, nucleus, weight, and predCS}

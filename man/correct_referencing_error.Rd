@@ -4,13 +4,18 @@
 \alias{correct_referencing_error}
 \title{Correct Referencing Errors}
 \usage{
-correct_referencing_error(observed_chemical_shifts, computed_chemical_shifts,
-  ratio_mean_sd = 3, threshold = -2, verbose = FALSE)
+correct_referencing_error(observed_chemical_shifts,
+  computed_chemical_shifts, ratio_mean_sd = 3, threshold = -2,
+  verbose = FALSE)
 }
 \arguments{
 \item{observed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, expCS}
 
 \item{computed_chemical_shifts}{observed chemical shift dataframe. Should contain field: resname, resid, nucleus, predCS}
+
+\item{ratio_mean_sd}{ratio of mean to sd of the error.}
+
+\item{threshold}{cutoff to use of identify systematic errors: entries with errors.}
 
 \item{verbose}{if TRUE, print progress log from MCMCpack. Default is FALSE}
 }
