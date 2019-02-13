@@ -4,10 +4,13 @@ Functions for the Analysis and Comparison of NMR Data. As of now, the focus is N
 # Installation (after cloning of downloading)
 ```
 # Clone nmR
+cd download_location
 git clone git@github.com:atfrank/nmR.git
 
 # Open R and install package
 R
+install.packages("devtools", dependencies = TRUE, repos = "http://cran.us.r-project.org")
+library("devtools")
 setwd(download_location)
 install("nmR")
 ```
